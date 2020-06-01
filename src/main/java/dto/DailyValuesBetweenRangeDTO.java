@@ -24,4 +24,16 @@ public class DailyValuesBetweenRangeDTO {
     public void setDailyValuesList(List<DailyValues> dailyValuesList) {
         this.dailyValuesList = dailyValuesList;
     }
+
+    public double getAverage_glucose_level() {
+        return average_glucose_level;
+    }
+
+    public double getAverage_carb_intake() {
+        return average_carb_intake;
+    }
+
+    public List<DailyValues> getDailyValuesList() {
+        return dailyValuesList;
+    }
 }
