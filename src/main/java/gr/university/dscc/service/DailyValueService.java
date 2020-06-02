@@ -1,12 +1,12 @@
-package service;
+package gr.university.dscc.service;
 
-import dto.DailyValuesBetweenRangeDTO;
-import model.DailyValues;
+import gr.university.dscc.dto.DailyValuesBetweenRangeDTO;
+import gr.university.dscc.model.DailyValues;
+import gr.university.dscc.util.HibernateUtil;
+import gr.university.dscc.util.LineChartGenerator;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.jfree.chart.JFreeChart;
-import util.HibernateUtil;
-import util.LineChartGenerator;
 
 import javax.ejb.Stateless;
 import javax.imageio.ImageIO;
@@ -18,7 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * main service that handles the database/transaction operations for the daily values entinty
+ * main gr.university.dscc.service that handles the database/transaction operations for the daily values entinty
  */
 @Stateless
 public class DailyValueService {

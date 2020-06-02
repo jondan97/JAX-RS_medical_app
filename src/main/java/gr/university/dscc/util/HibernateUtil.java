@@ -1,4 +1,4 @@
-package util;
+package gr.university.dscc.util;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;

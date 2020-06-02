@@ -1,4 +1,4 @@
-package util;
+package gr.university.dscc.util;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -8,7 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * this class is used as a util class to handle everything related to time in general, calculations between dates etc.
+ * this class is used as a gr.university.dscc.util class to handle everything related to time in general, calculations between dates etc.
  * will be done here and used 'globally' (statically)
  */
 public class Time {

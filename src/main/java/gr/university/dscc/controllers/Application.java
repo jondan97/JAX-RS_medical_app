@@ -1,4 +1,4 @@
-package controllers;
+package gr.university.dscc.controllers;
 
 import javax.ws.rs.ApplicationPath;
 

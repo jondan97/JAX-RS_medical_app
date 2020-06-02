@@ -1,6 +1,6 @@
-package dto;
+package gr.university.dscc.dto;
 
-import model.DailyValues;
+import gr.university.dscc.model.DailyValues;
 
 import java.util.List;
 

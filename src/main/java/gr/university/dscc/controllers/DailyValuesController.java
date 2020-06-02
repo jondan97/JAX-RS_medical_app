@@ -1,9 +1,9 @@
-package controllers;
+package gr.university.dscc.controllers;
 
-import dto.DailyValuesBetweenRangeDTO;
-import model.DailyValues;
-import service.DailyValueService;
-import util.Time;
+import gr.university.dscc.dto.DailyValuesBetweenRangeDTO;
+import gr.university.dscc.model.DailyValues;
+import gr.university.dscc.service.DailyValueService;
+import gr.university.dscc.util.Time;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
@@ -25,7 +25,7 @@ public class DailyValuesController {
     private HttpServletResponse response;
 
     /**
-     * this method creates a json which include the dto with all the data requested in the coursework, all data were
+     * this method creates a json which include the gr.university.dscc.dto with all the data requested in the coursework, all data were
      * included in the same method for efficiency reasons (reduce database reads)
      *
      * @param fromDateStr : the starting (older) date that the user has requested to the daily values from

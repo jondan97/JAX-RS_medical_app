@@ -1,6 +1,6 @@
-package util;
+package gr.university.dscc.util;
 
-import model.DailyValues;
+import gr.university.dscc.model.DailyValues;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.CategoryLabelPositions;
