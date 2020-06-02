@@ -1,5 +1,6 @@
 package model;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -57,7 +58,8 @@ public class DailyValues {
         this.medication_dose = medicationDose;
     }
 
-    @Column
+    @Column(nullable = false, updatable = false)
+    @CreationTimestamp
     public Date getInput_date() {
         return input_date;
     }

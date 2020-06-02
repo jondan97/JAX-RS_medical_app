@@ -6,8 +6,11 @@ import service.DailyValueService;
 import util.Time;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import java.io.IOException;
 import java.util.Date;
 
 /**
@@ -18,20 +21,23 @@ public class DailyValuesController {
     @Inject
     private DailyValueService dailyValueService;
 
+    @Context
+    private HttpServletResponse response;
+
     /**
      * this method creates a json which include the dto with all the data requested in the coursework, all data were
      * included in the same method for efficiency reasons (reduce database reads)
      *
-     * @param startDateStr : the starting (older) date that the user has requested to the daily values from
-     * @param endDateStr   : the end date (more recent) date that the user has requested
+     * @param fromDateStr : the starting (older) date that the user has requested to the daily values from
+     * @param toDateStr   : the end date (more recent) date that the user has requested
      * @return : returns a data transfer object with the averages glucose level, carb intake and a list with all the values in included in that date range
      */
     @Path("/range")
     @GET
     @Produces("application/json")
-    public DailyValuesBetweenRangeDTO findAllDailyValuesBetween(@QueryParam("from") String startDateStr,
-                                                                @QueryParam("to") String endDateStr) {
-        Date[] dateRange = Time.handleDates(startDateStr, endDateStr);
+    public DailyValuesBetweenRangeDTO findAllDailyValuesBetween(@QueryParam("from") String fromDateStr,
+                                                                @QueryParam("to") String toDateStr) throws IOException {
+        Date[] dateRange = Time.handleDates(fromDateStr, toDateStr);
         Date fromDate = dateRange[0];
         Date toDate = dateRange[1];
         return dailyValueService.fetchAndCalculateDailyValuesBetweenRange(fromDate, toDate);
@@ -44,39 +50,46 @@ public class DailyValuesController {
      *
      * @return : String that will be returned as a text/plain response: 'daily value saved'
      */
-    @Path("save/{id}/{glucose_level}/{carb_intake}/{medication_dose}")
-    @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String saveDailyValue(@PathParam("id") int id,
-                                 @PathParam("glucose_level") final int glucose_level,
-                                 @PathParam("carb_intake") final int carb_intake,
-                                 @PathParam("medication_dose") final int medication_dose) {
+    @Path("save")
+    @POST
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public void saveDailyValue(@FormParam("id") final int id,
+                               @FormParam("glucose_level") int glucose_level,
+                               @FormParam("carb_intake") int carb_intake,
+                               @FormParam("medication_dose") int medication_dose) throws IOException {
         DailyValues dailyValues = new DailyValues();
         //this means: 'create new object'
         if (id != 0) {
             dailyValues.setId(id);
         }
+        //we don't want negative numbers
+        if (glucose_level < 0)
+            glucose_level = 0;
+        if (carb_intake < 0)
+            carb_intake = 0;
+        if (medication_dose < 0)
+            medication_dose = 0;
+
         dailyValues.setGlucose_level(glucose_level);
         dailyValues.setCarb_intake(carb_intake);
         dailyValues.setMedication_dose(medication_dose);
-        dailyValues.setInput_date(new Date());
+        //dailyValues.setInput_date(new Date());
+
         dailyValueService.saveDailyValue(dailyValues);
-        return "Daily Value Saved!";
+        response.sendRedirect("/medical");
     }
 
     /**
      * method that deletes an item from the database, takes an ID as request and if it exists on the database, it will
      * be deleted
-     *
-     * @return : String that will be returned as a text/plain response: 'daily value deleted'
      */
-    @Path("delete/{id}")
-    @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String deleteDailyValue(@PathParam("id") final int id) {
+    @Path("delete")
+    @POST
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public void deleteDailyValue(@FormParam("id") final int id) throws IOException {
         DailyValues dailyValues = new DailyValues();
         dailyValues.setId(id);
         dailyValueService.deleteDailyValue(dailyValues);
-        return "Daily Value Deleted!";
+        response.sendRedirect("/medical");
     }
 }

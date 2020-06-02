@@ -1,0 +1,10 @@
+body {
+    text-align: center;
+}
+
+#dailyValues {
+    width: 38%;
+    white-space: nowrap;
+    overflow: hidden;
+    border: 1px solid #000;
+}
