@@ -37,7 +37,6 @@
     <!--    &lt;!&ndash; attempt to create authorization level &ndash;&gt;-->
     <!--    <security-constraint>-->
     <!--        <web-resource-collection>-->
-    <!--            <web-resource-name>Protected Area</web-resource-name>-->
     <!--            <url-pattern>/medical/api/*</url-pattern>-->
     <!--            <http-method>DELETE</http-method>-->
     <!--            <http-method>GET</http-method>-->
@@ -51,13 +50,21 @@
 
     <!--    <security-constraint>-->
     <!--        <web-resource-collection>-->
-    <!--            <web-resource-name>Protected Area</web-resource-name>-->
-    <!--            <url-pattern>/medical/</url-pattern>-->
+    <!--            <url-pattern>/medical/api/dailyValues/range</url-pattern>-->
     <!--            <http-method>GET</http-method>-->
     <!--        </web-resource-collection>-->
     <!--        <auth-constraint>-->
-    <!--            &lt;!&ndash; Only only administrator and CMS editors to access this area &ndash;&gt;-->
     <!--            <role-name>PHYSICIAN</role-name>-->
+    <!--        </auth-constraint>-->
+    <!--    </security-constraint>-->
+
+    <!--    this is not needed but for testing reasons-->
+    <!--    <security-constraint>-->
+    <!--        <web-resource-collection>-->
+    <!--            <url-pattern>/medical/*</url-pattern>-->
+    <!--        </web-resource-collection>-->
+    <!--        <auth-constraint>-->
+    <!--            <role-name>*</role-name>-->
     <!--        </auth-constraint>-->
     <!--    </security-constraint>-->
 

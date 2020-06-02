@@ -35,7 +35,7 @@ public class DailyValuesController {
     @Path("/range")
     @GET
     @Produces("application/json")
-    //@RolesAllowed("PHYSICIAN")
+    //@RolesAllowed({"PHYSICIAN", "ADMIN"})
     public DailyValuesBetweenRangeDTO findAllDailyValuesBetween(@QueryParam("from") String fromDateStr,
                                                                 @QueryParam("to") String toDateStr) throws IOException {
         Date[] dateRange = Time.handleDates(fromDateStr, toDateStr);
