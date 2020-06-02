@@ -35,6 +35,7 @@ public class DailyValuesController {
     @Path("/range")
     @GET
     @Produces("application/json")
+    //@RolesAllowed("PHYSICIAN")
     public DailyValuesBetweenRangeDTO findAllDailyValuesBetween(@QueryParam("from") String fromDateStr,
                                                                 @QueryParam("to") String toDateStr) throws IOException {
         Date[] dateRange = Time.handleDates(fromDateStr, toDateStr);
@@ -53,6 +54,7 @@ public class DailyValuesController {
     @Path("save")
     @POST
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    //@RolesAllowed("ADMIN")
     public void saveDailyValue(@FormParam("id") final int id,
                                @FormParam("glucose_level") int glucose_level,
                                @FormParam("carb_intake") int carb_intake,
@@ -86,6 +88,7 @@ public class DailyValuesController {
     @Path("delete")
     @POST
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    //@RolesAllowed("ADMIN")
     public void deleteDailyValue(@FormParam("id") final int id) throws IOException {
         DailyValues dailyValues = new DailyValues();
         dailyValues.setId(id);
